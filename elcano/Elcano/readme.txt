@@ -1,0 +1,1 @@
+The passphrase to unlock the door is "Hail Magellan"
