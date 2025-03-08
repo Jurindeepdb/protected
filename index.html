@@ -18,24 +18,53 @@
             font-style: normal;
         }
 
+        /* body {
+            font-family: Arial, sans-serif;
+            background-color: #222;
+            color: white;
+            text-align: center;
+            padding: 50px;
+            background: url("protected_img/qqq.jpg"); 
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed; 
+        } */
+
         body {
             font-family: Arial, sans-serif;
             background-color: #222;
             color: white;
             text-align: center;
             padding: 50px;
-            background: url("backgrounds/bg3.jpg"); /* Set your image here */
-            background-size: cover; /* Ensure the image covers the entire background */
-            background-position: center; /* Center the image */
-            background-attachment: fixed; /* Make the background fixed while scrolling */
+            position: relative;
+            overflow: hidden;
         }
+
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url("protected_img/qqq.jpg") center/cover no-repeat;
+            filter: blur(3px);
+            z-index: -1;
+        }
+
         #protected-content {
             display: none; /* Hide content until the correct password is entered */
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%); /* Centering trick */
+            text-align: center;
         }
         #protected-content p{
             font-family: "Tangerine", cursive;
             font-size: 3em;
             text-shadow: 2px 2px 4px#222;
+            color: #432818;
         }
         #protected-content img{
             width: 200px;
@@ -82,6 +111,10 @@
             width: 250px; /* Adjust width as needed */
             text-align: center;
             background-color: #d9aa58;
+            height: 20px;
+            margin-bottom: 20px;
+            border-radius: 20px;
+            border-color: #d9aa58;
         }
 
         button {
@@ -98,7 +131,7 @@
             font-family: "DM Serif Text", serif;
             text-shadow: 2px 2px 2px black;
             border-radius: 40px;
-
+            box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.323);
         }
         button:hover{
             transform: scale(1.05);
@@ -115,7 +148,7 @@
 <body>
 
     <div id="password-form">
-        <h2>You must enter the pattern that opens the gates</h2>
+        <h2>You must enter the key that opens this gate</h2>
         <div class="password-box">
             <input type="text" id="password" placeholder="">
             <button onclick="checkPassword()">Submit</button>
