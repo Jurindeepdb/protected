@@ -3,188 +3,73 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Password Protected</title>
+    <title>The Lost Cipher</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Special+Elite&display=swap" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Tangerine:wght@400;700&display=swap');
-        @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&display=swap');
-        .tangerine-regular {
-            font-family: "Tangerine", cursive;
-            font-weight: 400;
-            font-style: normal;
-        }
-        .dm-serif-text-regular {
-            font-family: "DM Serif Text", serif;
-            font-weight: 400;
-            font-style: normal;
-        }
 
-        /* body {
-            font-family: Arial, sans-serif;
-            background-color: #222;
-            color: white;
-            text-align: center;
-            padding: 50px;
-            background: url("protected_img/qqq.jpg"); 
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed; 
-        } */
-
+        @import url('https://fonts.googleapis.com/css2?family=Big+Shoulders+Stencil:opsz,wght@10..72,100..900&display=swap');
+        
         body {
-            font-family: Arial, sans-serif;
-            background-color: #222;
-            color: white;
-            text-align: center;
-            padding: 50px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        body::before {
-            content: "";
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url("protected_img/qqq.jpg") center/cover no-repeat;
-            filter: blur(3px);
-            z-index: -1;
-        }
-
-        #protected-content {
-            display: none; /* Hide content until the correct password is entered */
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%); /* Centering trick */
-            text-align: center;
-        }
-        #protected-content p{
-            font-family: "Tangerine", cursive;
-            font-size: 3em;
-            text-shadow: 2px 2px 4px#222;
-            color: #432818;
-        }
-        #protected-content img{
-            width: 200px;
-            height: 200px;
-            object-fit: cover;
-            cursor: pointer;
-            transition: transform 0.3s ease-in-out;
-            border-radius: 5px;
-        }
-        #protected-content img:hover{
-            transform: scale(1.05);
-        }
-
-        #password-form {
+            margin: 0;
+            font-family: 'Roboto', sans-serif; /* Applying Roboto font */
+            background-color: #ffffff;
+            color: #ffffff;
             display: flex;
-            flex-direction: column; /* Stack items vertically */
-            align-items: center; /* Center align */
-            text-align: center; /* Center text */
-            gap: 10px; /* Add space between elements */
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-        }
-
-        #password-form h2{
-            font-family: "Tangerine", cursive;
-            font-size: 3em;
-            text-shadow: 2px 2px 4px#222;
-            color: #432818;
-        }
-
-        .password-box {
-            display: flex;
-            flex-direction: column; /* Ensure input and button are stacked */
-            gap: 10px; /* Space between input and button */
+            justify-content: center;
             align-items: center;
-            
-        }
-
-        input {
-            padding: 10px;
-            font-size: 16px;
-            width: 250px; /* Adjust width as needed */
+            height: 100vh; 
             text-align: center;
-            background-color: #d9aa58;
-            height: 20px;
+            overflow: hidden; 
+        }
+
+        .big-shoulders-stencil-p {
+            font-family: "Big Shoulders Stencil", sans-serif;
+            font-optical-sizing: auto;
+            font-weight: 300;
+            font-style: normal;
+        }
+        .container {
+            position: absolute;
+            height: 50vh;
+            padding: 50px;
+        }
+        h1 {
+            font-size: 3em;
+            padding-top: 20px;
             margin-bottom: 20px;
-            border-radius: 20px;
-            border-color: #d9aa58;
+            color: #ffffff;
+            font-family: "Big Shoulders Stencil", sans-serif;
+        }
+        p {
+            font-size: 1.1em;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.6;
+            margin-bottom: 20px; 
+            font-family: 'Special Elite', cursive;
+        }
+        .container p {
+            font-size: 1.1em;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.6;
+            margin-bottom: 20px; 
+            font-family: "Big Shoulders Stencil", sans-serif;
+            color: #ff000000;
+            padding-top: 100px;
         }
 
-        button {
-            padding: 10px;
-            font-size: 1.2em;
-            cursor: pointer;
-            width: 100px;
-            background: url("backgrounds/bg2.jpg"); /* Set your image here */
-            background-size: cover; /* Ensure the image covers the entire background */
-            background-position: center; /* Center the image */
-            background-attachment: fixed; /* Make the background fixed while scrolling */
-            transition: transform 0.3s ease-in-out;
-            color: white;
-            font-family: "DM Serif Text", serif;
-            text-shadow: 2px 2px 2px black;
-            border-radius: 40px;
-            box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.323);
-        }
-        button:hover{
-            transform: scale(1.05);
-        }
-
-        #error-message {
-            color: red;
-            visibility: hidden; /* Keeps space reserved, but hides text */
-            height: 1em; /* Ensures consistent spacing */
+        a{
+            text-decoration: none;
         }
 
     </style>
 </head>
 <body>
-
-    <div id="password-form">
-        <h2>You must enter the key that opens this gate</h2>
-        <div class="password-box">
-            <input type="text" id="password" placeholder="">
-            <button onclick="checkPassword()">Submit</button>
-        </div>
-        <p id="error-message">Incorrect password, try again.</p>
-    </div>
-
-    <div id="protected-content">
-        <p>Here lies the legend of Elcano.</p>
-        <a href="Elcano.zip" download="">
-            <img src="elcano\Elcano's Chest.webp" alt="">
+    <div class="container">
+        <a href="https://github.com/Jurindeepdb/protected/releases/download/v1.0/protected-win32-x64.zip" download>
+            <p>https://github.com/Jurindeepdb/protected/releases/download/v1.0/protected-win32-x64.zip</p>
         </a>
     </div>
-
-    <script>
-        function checkPassword() {
-            const correctPassword = "🔑🪙🌊🏴‍☠️";  // Change this to your emoji password
-            const enteredPassword = document.getElementById("password").value.trim();
-            const errorMessage = document.getElementById("error-message");
-            const passwordForm = document.getElementById("password-form");
-            const protectedContent = document.getElementById("protected-content");
-
-            if (enteredPassword === correctPassword) {
-                passwordForm.style.display = "none";
-                protectedContent.style.display = "block";
-            } else {
-                errorMessage.style.visibility = "visible";
-            }
-        }
-        document.getElementById("password").addEventListener("keypress", function(event) {
-        if (event.key === "Enter") {
-            event.preventDefault(); // Prevents form submission if inside a form
-            checkPassword();
-        }
-        });
-    </script>
-
 </body>
 </html>
